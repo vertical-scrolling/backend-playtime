@@ -7,15 +7,10 @@
 # General application configuration
 import Config
 
-config :playtime,
-  ecto_repos: [Playtime.Repo]
-
 # Configures the endpoint
 config :playtime, PlaytimeWeb.Endpoint,
   url: [host: "localhost"],
-  render_errors: [view: PlaytimeWeb.ErrorView, accepts: ~w(json), layout: false],
-  pubsub_server: Playtime.PubSub,
-  live_view: [signing_salt: "SjUCZ4i8"]
+  render_errors: [view: PlaytimeWeb.ErrorView, accepts: ~w(json), layout: false]
 
 # Configures Elixir's Logger
 config :logger, :console,
