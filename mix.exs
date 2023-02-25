@@ -28,6 +28,7 @@ defmodule Playtime.MixProject do
 
   defp deps do
     [
+      {:html_entities, "~> 0.5.2"},
       {:jason, "~> 1.2"},
       {:mongodb_driver, "~> 1.0.0"},
       {:phoenix, "~> 1.6.16"},

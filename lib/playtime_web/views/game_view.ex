@@ -22,7 +22,7 @@ defmodule PlaytimeWeb.GameView do
       media: %{
         url: game_details.background_image
       },
-      description: game_details.description,
+      description: game_details.description |> HtmlEntities.decode(),
       playtime: game_details.playtime,
       status: game_details.status
     }
