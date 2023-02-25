@@ -29,6 +29,7 @@ defmodule Playtime.MixProject do
   defp deps do
     [
       {:jason, "~> 1.2"},
+      {:mongodb_driver, "~> 1.0.0"},
       {:phoenix, "~> 1.6.16"},
       {:plug_cowboy, "~> 2.5"},
       {:rawg_ex, git: "https://github.com/vertical-scrolling/rawg_ex.git", branch: "main"}

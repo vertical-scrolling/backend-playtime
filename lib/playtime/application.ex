@@ -5,11 +5,28 @@ defmodule Playtime.Application do
 
   @impl true
   def start(_type, _args) do
+    rawg_api_key =
+      Application.get_env(:playtime, Playtime)
+      |> Keyword.get(:rawg_api_key)
+
+    mongo_host =
+      Application.get_env(:playtime, Playtime.DB)
+      |> Keyword.get(:host)
+
+    mongo_username =
+      Application.get_env(:playtime, Playtime.DB)
+      |> Keyword.get(:username)
+
+    mongo_password =
+      Application.get_env(:playtime, Playtime.DB)
+      |> Keyword.get(:password)
+
     children = [
       PlaytimeWeb.Endpoint,
-      {RawgEx,
-       name: :playtime,
-       api_key: Application.get_env(:playtime, Playtime) |> Keyword.get(:rawg_api_key)}
+      {RawgEx, name: :playtime_rawg, api_key: rawg_api_key},
+      {Mongo,
+       name: :playtime_mongo,
+       url: "mongodb+srv://#{mongo_username}:#{mongo_password}@#{mongo_host}/playtime"}
     ]
 
     opts = [strategy: :one_for_one, name: Playtime.Supervisor]

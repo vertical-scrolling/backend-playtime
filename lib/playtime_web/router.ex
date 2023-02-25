@@ -15,9 +15,11 @@ defmodule PlaytimeWeb.Router do
     pipe_through :api
 
     get("/games", GameController, :get_games)
+    get("/games/:id", GameController, :get_game)
     get("/genres", GenreController, :get_genres)
     get("/platforms", PlatformController, :get_platforms)
     get("/stores", StoreController, :get_stores)
+    get("/users/:id", UserController, :get_user)
   end
 
   scope "/", PlaytimeWeb do

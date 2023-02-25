@@ -2,6 +2,11 @@ import Config
 
 config :playtime, Playtime, rawg_api_key: System.get_env("RAWG_API_KEY")
 
+config :playtime, Playtime.DB,
+  host: System.get_env("MONGO_HOST"),
+  username: System.get_env("MONGO_USERNAME"),
+  password: System.get_env("MONGO_PASSWORD")
+
 if System.get_env("PHX_SERVER") do
   config :playtime, PlaytimeWeb.Endpoint, server: true
 end
