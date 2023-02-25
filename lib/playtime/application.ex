@@ -6,7 +6,10 @@ defmodule Playtime.Application do
   @impl true
   def start(_type, _args) do
     children = [
-      PlaytimeWeb.Endpoint
+      PlaytimeWeb.Endpoint,
+      {RawgEx,
+       name: :playtime,
+       api_key: Application.get_env(:playtime, Playtime) |> Keyword.get(:rawg_api_key)}
     ]
 
     opts = [strategy: :one_for_one, name: Playtime.Supervisor]

@@ -5,7 +5,9 @@ defmodule PlaytimeWeb.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/api", PlaytimeWeb do
+  scope "/1", PlaytimeWeb do
     pipe_through :api
+
+    get("/games", GameController, :get_games)
   end
 end

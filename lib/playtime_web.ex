@@ -13,11 +13,10 @@ defmodule PlaytimeWeb do
   def view do
     quote do
       use Phoenix.View,
-        root: "lib/playtime_api/templates",
+        root: "lib/playtime_web/views",
         namespace: PlaytimeWeb
 
-      import Phoenix.Controller,
-        only: [get_flash: 1, get_flash: 2, view_module: 1, view_template: 1]
+      import Phoenix.Controller, only: [get_flash: 2, view_module: 1]
 
       unquote(view_helpers())
     end
@@ -42,7 +41,6 @@ defmodule PlaytimeWeb do
     quote do
       import Phoenix.View
 
-      import PlaytimeWeb.ErrorHelpers
       alias PlaytimeWeb.Router.Helpers, as: Routes
     end
   end
