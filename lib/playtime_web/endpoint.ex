@@ -18,6 +18,12 @@ defmodule PlaytimeWeb.Endpoint do
     pass: ["*/*"],
     json_decoder: Phoenix.json_library()
 
+  plug Plug.Static,
+    at: "/",
+    from: :playtime,
+    gzip: false,
+    only: ~w(assets fonts images favicon.ico robots.txt)
+
   plug Plug.MethodOverride
   plug Plug.Head
   plug Plug.Session, @session_options

@@ -1,6 +1,12 @@
 defmodule PlaytimeWeb.Router do
   use PlaytimeWeb, :router
 
+  pipeline :static do
+    plug Plug.Static,
+      at: "/",
+      from: {:playtime, "priv/static"}
+  end
+
   pipeline :api do
     plug :accepts, ["json"]
   end
@@ -12,5 +18,10 @@ defmodule PlaytimeWeb.Router do
     get("/genres", GenreController, :get_genres)
     get("/platforms", PlatformController, :get_platforms)
     get("/stores", StoreController, :get_stores)
+  end
+
+  scope "/", PlaytimeWeb do
+    pipe_through :static
+    get("/*not_found", FallbackController, :not_found)
   end
 end
