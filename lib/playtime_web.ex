@@ -1,6 +1,9 @@
 defmodule PlaytimeWeb do
   @moduledoc false
 
+  @default_page_size 20
+  def default_page_size, do: @default_page_size
+
   def controller do
     quote do
       use Phoenix.Controller, namespace: PlaytimeWeb

@@ -9,5 +9,6 @@ defmodule PlaytimeWeb.Router do
     pipe_through :api
 
     get("/games", GameController, :get_games)
+    get("/genres", GenreController, :get_genres)
   end
 end

@@ -4,4 +4,10 @@ defmodule Playtime do
       games
     end
   end
+
+  def get_genres(opts) do
+    with {:ok, %{results: genres}} <- RawgEx.get_genres(:playtime, opts) do
+      genres
+    end
+  end
 end
