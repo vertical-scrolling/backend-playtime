@@ -6,7 +6,7 @@ defmodule PlaytimeWeb.GameController do
   def get_game(conn, get_params) do
     id = get_params |> Map.get("id")
     user_id = get_params |> Map.get("user_id")
-    game_status = Playtime.DB.game_status(user_id, id)
+    game_status = Playtime.DB.get_game_status(user_id, id)
 
     game_details =
       Playtime.get_game(id)

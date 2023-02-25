@@ -20,10 +20,16 @@ defmodule PlaytimeWeb.Router do
     get("/platforms", PlatformController, :get_platforms)
     get("/stores", StoreController, :get_stores)
     get("/users/:id", UserController, :get_user)
+    put("/users/:user_id/games/:game_id/status", UserController, :set_game_status)
   end
 
   scope "/", PlaytimeWeb do
     pipe_through :static
     get("/*not_found", FallbackController, :not_found)
+    post("/*not_found", FallbackController, :not_found)
+    put("/*not_found", FallbackController, :not_found)
+    delete("/*not_found", FallbackController, :not_found)
+    head("/*not_found", FallbackController, :not_found)
+    patch("/*not_found", FallbackController, :not_found)
   end
 end

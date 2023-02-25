@@ -1,11 +1,35 @@
 defmodule Playtime.DB do
   def get_user(id) do
-    doc = %{_id: id, name: new_name(id), media: new_media(id), playtime: 0, completed: []}
-    Mongo.update_one!(:playtime_mongo, "users", %{_id: id}, %{"$setOnInsert": doc}, upsert: true)
-    doc |> doc_to_map()
+    doc = %{
+      "_id" => id,
+      "name" => new_name(id),
+      "media" => new_media(id),
+      "playtime" => 0,
+      "completed" => []
+    }
+
+    with {:ok, new} <-
+           Mongo.find_one_and_update(
+             :playtime_mongo,
+             "users",
+             %{_id: id},
+             %{
+               "$setOnInsert": doc
+             },
+             new: true,
+             upsert: true
+           ) do
+      case new do
+        nil ->
+          doc |> doc_to_map()
+
+        _otherwise ->
+          new |> doc_to_map()
+      end
+    end
   end
 
-  def game_status(user_id, game_id) do
+  def get_game_status(user_id, game_id) do
     case Mongo.find(:playtime_mongo, "users", %{_id: user_id, completed: %{"$in": [game_id]}}) do
       %{docs: []} ->
         :not_played
@@ -15,7 +39,7 @@ defmodule Playtime.DB do
     end
   end
 
-  def game_status(user_id, game_id, :completed) do
+  def set_game_status(user_id, game_id, :completed) do
     playtime =
       Playtime.get_game(game_id)
       |> Map.get(:playtime)
@@ -28,7 +52,7 @@ defmodule Playtime.DB do
     :ok
   end
 
-  def game_status(user_id, game_id, :not_played) do
+  def set_game_status(user_id, game_id, :not_played) do
     playtime =
       Playtime.get_game(game_id)
       |> Map.get(:playtime)
@@ -42,11 +66,12 @@ defmodule Playtime.DB do
   end
 
   defp doc_to_map(doc) do
-    id = Map.get(doc, :_id)
+    id = Map.get(doc, "_id")
 
     doc
-    |> Map.put(:id, id)
-    |> Map.delete(:_id)
+    |> Map.put("id", id)
+    |> Map.delete("_id")
+    |> Map.new(fn {k, v} -> {String.to_atom(k), v} end)
   end
 
   defp new_name(id) do
