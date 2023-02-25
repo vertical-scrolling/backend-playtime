@@ -3,7 +3,7 @@ defmodule PlaytimeWeb.PlatformView do
 
   def render("platform.json", %{platform: platform}) do
     %{
-      id: platform.id,
+      id: platform.id |> Integer.to_string(),
       name: platform.name
     }
   end

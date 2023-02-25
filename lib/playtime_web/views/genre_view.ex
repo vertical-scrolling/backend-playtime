@@ -3,7 +3,7 @@ defmodule PlaytimeWeb.GenreView do
 
   def render("genre.json", %{genre: genre}) do
     %{
-      id: genre.id,
+      id: genre.id |> Integer.to_string(),
       name: genre.name
     }
   end

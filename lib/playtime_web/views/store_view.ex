@@ -3,7 +3,7 @@ defmodule PlaytimeWeb.StoreView do
 
   def render("store.json", %{store: store}) do
     %{
-      id: store.id,
+      id: store.id |> Integer.to_string(),
       name: store.name
     }
   end

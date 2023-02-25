@@ -3,7 +3,7 @@ defmodule PlaytimeWeb.GameView do
 
   def render("game.json", %{game: game}) do
     %{
-      id: game.id,
+      id: game.id |> Integer.to_string(),
       name: game.name,
       released: game.released,
       rating: game.rating,
