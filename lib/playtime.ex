@@ -10,4 +10,10 @@ defmodule Playtime do
       genres
     end
   end
+
+  def get_platforms(opts) do
+    with {:ok, %{results: platforms}} <- RawgEx.get_platforms(:playtime, opts) do
+      platforms
+    end
+  end
 end
