@@ -6,7 +6,7 @@ defmodule PlaytimeWeb.StoreController do
   def get_stores(conn, get_params) do
     page = get_params |> Map.get("page", 1)
     page_size = get_params |> Map.get("page_size", PlaytimeWeb.default_page_size())
-    ordering = get_params |> Map.get("ordering", :games_count)
+    ordering = get_params |> Map.get("ordering", :"-games_count")
 
     stores =
       Playtime.get_stores(

@@ -6,7 +6,7 @@ defmodule PlaytimeWeb.GameController do
   def get_games(conn, get_params) do
     page = get_params |> Map.get("page", 1)
     page_size = get_params |> Map.get("page_size", PlaytimeWeb.default_page_size())
-    ordering = get_params |> Map.get("ordering", :rating)
+    ordering = get_params |> Map.get("ordering", :"-rating")
     genre = get_params |> Map.get("genre")
     platform = get_params |> Map.get("platform")
     rating = get_params |> Map.get("rating")
