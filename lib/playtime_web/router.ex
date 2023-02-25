@@ -11,5 +11,6 @@ defmodule PlaytimeWeb.Router do
     get("/games", GameController, :get_games)
     get("/genres", GenreController, :get_genres)
     get("/platforms", PlatformController, :get_platforms)
+    get("/stores", StoreController, :get_stores)
   end
 end

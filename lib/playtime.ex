@@ -16,4 +16,10 @@ defmodule Playtime do
       platforms
     end
   end
+
+  def get_stores(opts) do
+    with {:ok, %{results: stores}} <- RawgEx.get_stores(:playtime, opts) do
+      stores
+    end
+  end
 end
